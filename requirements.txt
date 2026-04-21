@@ -5,4 +5,3 @@ kaggle
 kagglehub
 python-dotenv
 requests
-beautifulsoup4
