@@ -5,15 +5,26 @@ This project analyzes factors that influence board game ratings using machine le
 
 # Data sources
 
-- **Kaggle Dataset**  
-  A dataset containing board game attributes such as player counts, playtime, minimum age, year published, and user ratings.  
-  This is the primary data source currently used in the project.
+- **BoardGameGeek Ranking Dataset**
+  
+  https://boardgamegeek.com/data_dumps/bg_ranks
+  
+  An official dataset containing board game rankings, average ratings, and user statistics.  
+  This dataset is used to identify the top 500 board games for analysis.
 
-- **BoardGameGeek XML API (planned)**  
-  Intended for retrieving additional game details. API access has been requested and is pending approval.
+- **BoardGameGeek XML API**
 
-- **BoardGameGeek HTML pages (planned)**  
-  Attempted to scrape ranking data, but direct access is currently restricted (HTTP 403).
+  https://boardgamegeek.com
+  
+  Used to retrieve detailed game information, including mechanics, categories, player count, playtime, and complexity.  
+  This serves as the primary source of features for the machine learning model.
+
+- **Kaggle Dataset**
+
+  https://www.kaggle.com/datasets/sujaykapadnis/board-games
+
+  A dataset derived from the BoardGameGeek API, containing board game attributes and rating-related information.  
+  Used for initial exploration to understand the structure of board game data.
 
 
 # Results
