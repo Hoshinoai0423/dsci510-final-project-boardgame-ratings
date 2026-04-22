@@ -77,6 +77,24 @@ Make sure the token is valid and API access has been approved.
 BGG_TOKEN=your_token_here
 ```
 
+3. Launch Jupyter Notebook:
+
+```
+cd src
+jupyter notebook
+```
+
+4. Open main.ipynb and run all cells to:
+- load and filter the ranking dataset
+- retrieve game features via the BGG XML API
+- clean and preprocess the data
+- train and evaluate the machine learning model
+- generate and save results
+
+Notes:
+The workflow is fully notebook-based.
+The BGG ranking dataset is updated daily.
+API requests are rate-limited; batch requests and delays are used to save time and avoid throttling.
 
 
 <img width="1104" height="324" alt="powered_by_BGG" src="https://github.com/user-attachments/assets/4df5e3ce-2ad3-4b3c-b520-e5af8f116354" />
