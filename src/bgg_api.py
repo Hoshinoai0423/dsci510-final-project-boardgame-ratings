@@ -16,7 +16,7 @@ def load_bgg_token() -> str:
     return token
 
 
-def _safe_get_value(parent, tag: str) -> str | None:
+def safe_get_value(parent, tag: str) -> str | None:
     child = parent.find(tag) if parent is not None else None
     return child.attrib.get("value") if child is not None else None
 
@@ -41,13 +41,13 @@ def parse_item(item) -> dict:
         name = first_name.attrib.get("value") if first_name is not None else None
 
     # Basic fields
-    yearpublished = _safe_get_value(item, "yearpublished")
-    minplayers = _safe_get_value(item, "minplayers")
-    maxplayers = _safe_get_value(item, "maxplayers")
-    playingtime = _safe_get_value(item, "playingtime")
-    minplaytime = _safe_get_value(item, "minplaytime")
-    maxplaytime = _safe_get_value(item, "maxplaytime")
-    minage = _safe_get_value(item, "minage")
+    yearpublished = safe_get_value(item, "yearpublished")
+    minplayers = safe_get_value(item, "minplayers")
+    maxplayers = safe_get_value(item, "maxplayers")
+    playingtime = safe_get_value(item, "playingtime")
+    minplaytime = safe_get_value(item, "minplaytime")
+    maxplaytime = safe_get_value(item, "maxplaytime")
+    minage = safe_get_value(item, "minage")
 
     # Lists from link tags
     categories = []
@@ -71,17 +71,17 @@ def parse_item(item) -> dict:
     # Statistics fields
     ratings = item.find("statistics/ratings")
 
-    average = _safe_get_value(ratings, "average")
-    usersrated = _safe_get_value(ratings, "usersrated")
-    bayesaverage = _safe_get_value(ratings, "bayesaverage")
-    stddev = _safe_get_value(ratings, "stddev")
-    owned = _safe_get_value(ratings, "owned")
-    trading = _safe_get_value(ratings, "trading")
-    wanting = _safe_get_value(ratings, "wanting")
-    wishing = _safe_get_value(ratings, "wishing")
-    numcomments = _safe_get_value(ratings, "numcomments")
-    numweights = _safe_get_value(ratings, "numweights")
-    averageweight = _safe_get_value(ratings, "averageweight")
+    average = safe_get_value(ratings, "average")
+    usersrated = safe_get_value(ratings, "usersrated")
+    bayesaverage = safe_get_value(ratings, "bayesaverage")
+    stddev = safe_get_value(ratings, "stddev")
+    owned = safe_get_value(ratings, "owned")
+    trading = safe_get_value(ratings, "trading")
+    wanting = safe_get_value(ratings, "wanting")
+    wishing = safe_get_value(ratings, "wishing")
+    numcomments = safe_get_value(ratings, "numcomments")
+    numweights = safe_get_value(ratings, "numweights")
+    averageweight = safe_get_value(ratings, "averageweight")
 
     return {
         "id": game_id,
@@ -115,7 +115,7 @@ def get_game_details(game_id: int, token: str) -> dict:
     url = f"https://boardgamegeek.com/xmlapi2/thing?id={game_id}&stats=1"
 
     headers = {
-        "User-Agent": "Mozilla/5.0",
+        "User-Agent": "wwang050",
         "Authorization": f"Bearer {token}"
     }
 
@@ -136,7 +136,7 @@ def get_games_details_batch(batch_ids: list[int], token: str) -> list[dict]:
     url = f"https://boardgamegeek.com/xmlapi2/thing?id={ids_str}&stats=1"
 
     headers = {
-        "User-Agent": "Mozilla/5.0",
+        "User-Agent": "wwang050",
         "Authorization": f"Bearer {token}"
     }
 
