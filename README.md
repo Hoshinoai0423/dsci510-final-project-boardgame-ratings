@@ -5,28 +5,48 @@ This project analyzes factors that influence board game ratings using machine le
 
 # Data sources
 
-- **Kaggle Dataset**  
-  A dataset containing board game attributes such as player counts, playtime, minimum age, year published, and user ratings.  
-  This is the primary data source currently used in the project.
+- **BoardGameGeek Ranking Dataset**
+  
+  https://boardgamegeek.com/data_dumps/bg_ranks
+  
+  An official dataset containing board game rankings, average ratings, and user statistics.  
+  This dataset is used to identify the top 500 board games for analysis.
 
-- **BoardGameGeek XML API (planned)**  
-  Intended for retrieving additional game details. API access has been requested and is pending approval.
+- **BoardGameGeek XML API**
 
-- **BoardGameGeek HTML pages (planned)**  
-  Attempted to scrape ranking data, but direct access is currently restricted (HTTP 403).
+  https://boardgamegeek.com
+  
+  Used to retrieve detailed game information, including mechanics, categories, player count, playtime, and complexity.  
+  This serves as the primary source of features for the machine learning model.
+
+- **Kaggle Dataset**
+
+  https://www.kaggle.com/datasets/sujaykapadnis/board-games
+
+  A dataset derived from the BoardGameGeek API, containing board game attributes and rating-related information.  
+  Used for initial exploration to understand the structure of board game data.
 
 
 # Results
 
-At the current stage, the project has completed data loading and cleaning using the Kaggle dataset.
+The project successfully constructed a machine learning pipeline to analyze board game ratings using data from BoardGameGeek.
 
-The dataset has been processed by:
-- removing irrelevant columns (e.g., text and image fields)
-- selecting numerical features
-- preparing data for machine learning models
+A decision tree regression model was trained to predict game ratings based on design-related features, including mechanics, categories, player count, playtime, and complexity.
 
-Further modeling (e.g., Decision Tree) will be implemented in the next stage.
+Model performance was evaluated using RMSE and R² metrics:
+- **Best model:**
+  - max depth = 4
+  - RMSE ≈ 0.217
+  - R² ≈ 0.57
 
+Hyperparameter tuning showed that a shallow tree (depth = 4) achieved the best balance between underfitting and overfitting.
+
+Feature importance analysis indicates that:
+- Game complexity (averageweight) and player-related attributes have a moderate impact on ratings
+- Mechanics such as "Push Your Luck" show high influence on rating prediction.
+- Popularity-related features were intentionally excluded to focus on design factors
+
+Overall, the model explains a substantial portion of rating variation while maintaining interpretability.
 
 # Installation
 
@@ -37,28 +57,47 @@ Further modeling (e.g., Decision Tree) will be implemented in the next stage.
 pip install -r requirements.txt
 ```
 
-If using BoardGameGeek API in the future, a token may be required and stored in a .env file.
+- Create a .env file in the src/ directory and add your BoardGameGeek API token:
+
+```bash
+BGG_TOKEN=your_token_here
+```
+
+Make sure the token is valid and API access has been approved.
 
 # Running analysis
 
-1. Place the Kaggle dataset file `board_games.csv` in the `data/` folder.
+1. Download the BGG ranking dataset and place the extracted CSV file (e.g., `boardgames_ranks.csv`) in the `data/` folder:
 
-2. Open Jupyter Notebook:
+- https://boardgamegeek.com/data_dumps/bg_ranks
 
-```bash
+2. Create a `.env` file in the `src/` directory and add your BGG API token:
+
+```text
+BGG_TOKEN=your_token_here
+```
+
+3. Launch Jupyter Notebook:
+
+```
 cd src
 jupyter notebook
 ```
 
-Open the notebook and run all cells to:
-load the dataset
-clean the data
-prepare features for analysis
+4. Open main.ipynb and run all cells to:
+- load and filter the ranking dataset
+- retrieve game features via the BGG XML API
+- clean and preprocess the data
+- train and evaluate the machine learning model
+- generate and save results
 
-Note:
+Notes:
+The workflow is fully notebook-based.
+The BGG ranking dataset is updated daily.
+API requests are rate-limited; batch requests and delays are used to save time and avoid throttling.
 
-The current workflow is notebook-based.
-API and HTML extraction scripts are included but not yet fully operational due to access limitations.
+
+<img width="1104" height="324" alt="powered_by_BGG" src="https://github.com/user-attachments/assets/4df5e3ce-2ad3-4b3c-b520-e5af8f116354" />
 
 
 
