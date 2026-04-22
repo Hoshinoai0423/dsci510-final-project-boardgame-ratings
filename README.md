@@ -18,15 +18,24 @@ This project analyzes factors that influence board game ratings using machine le
 
 # Results
 
-At the current stage, the project has completed data loading and cleaning using the Kaggle dataset.
+The project successfully constructed a machine learning pipeline to analyze board game ratings using data from BoardGameGeek.
 
-The dataset has been processed by:
-- removing irrelevant columns (e.g., text and image fields)
-- selecting numerical features
-- preparing data for machine learning models
+A decision tree regression model was trained to predict game ratings based on design-related features, including mechanics, categories, player count, playtime, and complexity.
 
-Further modeling (e.g., Decision Tree) will be implemented in the next stage.
+Model performance was evaluated using RMSE and R² metrics:
+- **Best model:**
+  - max depth = 4
+  - RMSE ≈ 0.217
+  - R² ≈ 0.57
 
+Hyperparameter tuning showed that a shallow tree (depth = 4) achieved the best balance between underfitting and overfitting.
+
+Feature importance analysis indicates that:
+- Game complexity (averageweight) and player-related attributes have a moderate impact on ratings
+- Mechanics such as "Push Your Luck" show high influence on rating prediction.
+- Popularity-related features were intentionally excluded to focus on design factors
+
+Overall, the model explains a substantial portion of rating variation while maintaining interpretability.
 
 # Installation
 
@@ -37,28 +46,29 @@ Further modeling (e.g., Decision Tree) will be implemented in the next stage.
 pip install -r requirements.txt
 ```
 
-If using BoardGameGeek API in the future, a token may be required and stored in a .env file.
+- Create a .env file in the src/ directory and add your BoardGameGeek API token:
+
+```bash
+BGG_TOKEN=your_token_here
+```
+
+Make sure the token is valid and API access has been approved.
 
 # Running analysis
 
-1. Place the Kaggle dataset file `board_games.csv` in the `data/` folder.
+1. Download the BGG ranking dataset and place the extracted CSV file (e.g., `boardgames_ranks.csv`) in the `data/` folder:
 
-2. Open Jupyter Notebook:
+- https://boardgamegeek.com/data_dumps/bg_ranks
 
-```bash
-cd src
-jupyter notebook
+2. Create a `.env` file in the `src/` directory and add your BGG API token:
+
+```text
+BGG_TOKEN=your_token_here
 ```
 
-Open the notebook and run all cells to:
-load the dataset
-clean the data
-prepare features for analysis
 
-Note:
 
-The current workflow is notebook-based.
-API and HTML extraction scripts are included but not yet fully operational due to access limitations.
+<img width="1104" height="324" alt="powered_by_BGG" src="https://github.com/user-attachments/assets/4df5e3ce-2ad3-4b3c-b520-e5af8f116354" />
 
 
 
