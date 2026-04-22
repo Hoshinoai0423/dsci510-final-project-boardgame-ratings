@@ -3,7 +3,6 @@ import time
 import requests
 import xml.etree.ElementTree as ET
 import pandas as pd
-from configs import BGG_API_URL
 from dotenv import load_dotenv
 
 
@@ -113,7 +112,7 @@ def parse_item(item) -> dict:
 
 
 def get_game_details(game_id: int, token: str) -> dict:
-    url = f"{BGG_API_URL}?id={game_id}&stats=1"
+    url = f"https://boardgamegeek.com/xmlapi2/thing?id={game_id}&stats=1"
 
     headers = {
         "User-Agent": "wwang050",
@@ -134,7 +133,7 @@ def get_game_details(game_id: int, token: str) -> dict:
 
 def get_games_details_batch(batch_ids: list[int], token: str) -> list[dict]:
     ids_str = ",".join(map(str, batch_ids))
-    url = f"{BGG_API_URL}?id={ids_str}&stats=1"
+    url = f"https://boardgamegeek.com/xmlapi2/thing?id={ids_str}&stats=1"
 
     headers = {
         "User-Agent": "wwang050",
