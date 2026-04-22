@@ -10,7 +10,7 @@ def inspect_bgg_item(game_id: int):
     url = f"https://boardgamegeek.com/xmlapi2/thing?id={game_id}&stats=1"
 
     headers = {
-        "User-Agent": "Mozilla/5.0",
+        "User-Agent": "wwang050",
         "Authorization": f"Bearer {token}"
     }
 
