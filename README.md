@@ -46,7 +46,6 @@ Feature importance analysis indicates that:
 - Mechanics such as "Push Your Luck" show high influence on rating prediction.
 - Popularity-related features were intentionally excluded to focus on design factors
 
-Overall, the model explains a substantial portion of rating variation while maintaining interpretability.
 
 # Installation
 
@@ -92,7 +91,7 @@ jupyter notebook
 - generate and save results
 
 Notes:
-The workflow is fully notebook-based.
+The workflow is fully notebook-based. ChatGPT used for debugging and handling list features.
 The BGG ranking dataset is updated daily.
 API requests are rate-limited; batch requests and delays are used to save time and avoid throttling.
 
